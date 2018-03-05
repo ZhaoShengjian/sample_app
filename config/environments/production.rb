@@ -54,16 +54,21 @@ Rails.application.configure do
   # Use the lowest log level to ensure availability of diagnostic information
   # when problems arise.
   
-  config.action_mailer.delivery_method = :smtp
-  config.action_mailer.perform_deliveries = true
-  config.action_mailer.raise_delivery_errors = true
-  config.action_mailer.default :charset => "utf-8"
-  config.action_mailer.default_url_options = { :host => '域名'}
-  ActionMailer::Base.smtp_settings = {
-    :address        => 'smtp.163.net',
-    :port           => 25,
-    :user_name      => 'lmm_rubystudy',
-    :password       => '1998asdf',
+  # Don't care if the mailer can't send.
+  ActionMailer::Base.delivery_method = :smtp  
+    config.action_mailer.perform_deliveries = true  
+    config.action_mailer.raise_delivery_errors = true  
+    config.action_mailer.default :charset => "utf-8" 
+    config.action_mailer.default_url_options = { host: 'https://stormy-temple-70374.herokuapp.com'} 
+    ActionMailer::Base.smtp_settings = {    
+        :address => "smtp.qq.com", #邮件服务器地址 
+        :port => 587,  
+        :domain => "qq.com", #服务器域名，如xxx@yeah.net域名就是yeah.net
+        :authentication => :login,   
+        :user_name => "1033409463@qq.com",  #邮件用户名，如xxx@yeah.net用户名就是xxx
+        :password => "tmbjrrrivrcfbejb",  #与登录密码不同，此处是客户端授权密码，切记！
+        :enable_starttls_auto => true,
+        #:openssl_verify_mode => 'none',
   }
   
   config.log_level = :debug
