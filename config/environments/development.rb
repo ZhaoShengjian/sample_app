@@ -27,10 +27,21 @@ Rails.application.configure do
   end
 
   # Don't care if the mailer can't send.
-  config.action_mailer.raise_delivery_errors = true
-  config.action_mailer.delivery_method = :test
-  host = 'stormy-temple-70374.herokuapp.com' # Don't use this literally; use your local dev host instead
-  config.action_mailer.default_url_options = { host: host, protocol: 'https' }
+  ActionMailer::Base.delivery_method = :smtp  
+    config.action_mailer.perform_deliveries = true  
+    config.action_mailer.raise_delivery_errors = true  
+    config.action_mailer.default :charset => "utf-8" 
+    config.action_mailer.default_url_options = { host: 'localhost:3000'} 
+    ActionMailer::Base.smtp_settings = {    
+        :address => "smtp.qq.com", #邮件服务器地址 
+        :port => 587,  
+        :domain => "qq.com", #服务器域名，如xxx@yeah.net域名就是yeah.net
+        :authentication => :login,   
+        :user_name => "1033409463@qq.com",  #邮件用户名，如xxx@yeah.net用户名就是xxx
+        :password => "tmbjrrrivrcfbejb",  #与登录密码不同，此处是客户端授权密码，切记！
+        :enable_starttls_auto => true,
+        #:openssl_verify_mode => 'none',
+  }
   
   config.action_mailer.perform_caching = false
 

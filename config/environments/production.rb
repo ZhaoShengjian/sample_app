@@ -53,19 +53,17 @@ Rails.application.configure do
 
   # Use the lowest log level to ensure availability of diagnostic information
   # when problems arise.
-
-  config.action_mailer.raise_delivery_errors = true
+  
   config.action_mailer.delivery_method = :smtp
-  host = 'stormy-temple-70374.herokuapp.com'
-  config.action_mailer.default_url_options = { host: host }
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.default :charset => "utf-8"
+  config.action_mailer.default_url_options = { :host => '域名'}
   ActionMailer::Base.smtp_settings = {
-    :address        => 'smtp.sendgrid.net',
-    :port           => '587',
-    :authentication => :plain,
-    :user_name      => ENV['SENDGRID_USERNAME'],
-    :password       => ENV['SENDGRID_PASSWORD'],
-    :domain         => 'heroku.com',
-    :enable_starttls_auto => true
+    :address        => 'smtp.163.net',
+    :port           => 25,
+    :user_name      => 'lmm_rubystudy',
+    :password       => '1998asdf',
   }
   
   config.log_level = :debug
